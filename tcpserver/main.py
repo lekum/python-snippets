@@ -1,5 +1,5 @@
 import sys
-from socketserver import BaseRequestHandler, TCPServer
+from socketserver import BaseRequestHandler, ThreadingTCPServer
 
 class EchoHandler(BaseRequestHandler):
 
@@ -17,6 +17,9 @@ if __name__ == '__main__':
         print("Usage: python main.py port")
         sys.exit(1)
     port = int(sys.argv[1])
-    serv = TCPServer(('', port), EchoHandler)
-    serv.serve_forever()
-
+    try:
+        serv = ThreadingTCPServer(('', port), EchoHandler)
+        serv.serve_forever()
+    except KeyboardInterrupt:
+        serv.shutdown()
+        serv.server_close()
