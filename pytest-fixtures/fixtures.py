@@ -1,7 +1,7 @@
 import pytest
 import requests
 import random
-from unittest.mock import MagicMock, call
+from unittest.mock import MagicMock, call, patch
 
 @pytest.fixture
 def random_word():
@@ -20,3 +20,9 @@ def test_example_requests(monkeypatch):
 
     assert responses == [0, 1, 2]
     assert mockrequests.call_args_list == [call("http://myurl.com/0"), call("http://myurl.com/1"), call("http://myurl.com/2")]
+
+def test_patch_requests_get():
+    with patch.object(requests, 'get') as mock_get:
+        mock_get.side_effect = lambda *args,**kwargs: "kk"
+        assert requests.get("http://myexample.com") == "kk"
+        mock_get.assert_called_once_with("http://myexample.com")
