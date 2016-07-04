@@ -26,3 +26,8 @@ def test_patch_requests_get():
         mock_get.side_effect = lambda *args,**kwargs: "kk"
         assert requests.get("http://myexample.com") == "kk"
         mock_get.assert_called_once_with("http://myexample.com")
+
+def test_exception():
+    mydict = {}
+    with pytest.raises(KeyError):
+        mydict['not_present']
