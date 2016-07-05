@@ -31,3 +31,11 @@ def test_exception():
     mydict = {}
     with pytest.raises(KeyError):
         mydict['not_present']
+
+@pytest.mark.skip(reason="Would always fail")
+def test_skipped():
+    assert False
+
+@pytest.mark.xfail
+def test_fails():
+    assert False
