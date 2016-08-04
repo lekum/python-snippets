@@ -1,4 +1,4 @@
-from socketserver import BaseRequestHandler, UDPServer
+from socketserver import BaseRequestHandler, ThreadingUDPServer
 import time
 
 class TimeHandler(BaseRequestHandler):
@@ -11,5 +11,5 @@ class TimeHandler(BaseRequestHandler):
 
 if __name__ == '__main__':
 
-    serv = UDPServer(('', 20000), TimeHandler)
+    serv = ThreadingUDPServer(('', 20000), TimeHandler)
     serv.serve_forever()
