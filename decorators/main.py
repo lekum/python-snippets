@@ -5,9 +5,10 @@ def squared(func):
     """
     Decorator that returns func * func
     """
-    print("Executing squared")
+    print("Executing squared decorator")
     @wraps(func)
     def wrapper(*args, **kwargs):
+        print("Executing the wrapper function returned by squared")
         return func(*args, **kwargs) * func(*args, **kwargs)
     return wrapper
 
@@ -15,9 +16,10 @@ def minus(func):
     """
     Decorator that returns -func
     """
-    print("Executing minus")
+    print("Executing minus decorator")
     @wraps(func)
     def wrapper(*args, **kwargs):
+        print("Executing the wrapper function returned by minus")
         return -func(*args, **kwargs)
     return wrapper
 
